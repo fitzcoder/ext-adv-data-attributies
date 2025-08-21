@@ -22,10 +22,10 @@ function renderReadingTime(article) {
   // Support for article docs with date
   const date = article.querySelector("time")?.parentNode;
 
-  (date ?? heading).insertAdjacentElement("afterend", badge);
+  (date ?? heading)?.insertAdjacentElement("afterend", badge);
 }
 
-renderReadingTime(document.querySelector("article"));
+// renderReadingTime(document.querySelector("article"));
 
 const observer = new MutationObserver((mutations) => {
   for (const mutation of mutations) {
@@ -43,6 +43,6 @@ const observer = new MutationObserver((mutations) => {
 // update the address bar and render new content without reloading. Our content
 // script won't be reinjected when this happens, so we need to watch for
 // changes to the content.
-observer.observe(document.querySelector("devsite-content"), {
-  childList: true,
-});
+// observer.observe(document.querySelector("devsite-content"), {
+//   childList: true,
+// });

@@ -1,3 +1,164 @@
-h1 {
+body {
+  --dda-bg: #ececec;
+  --dda-primary: #ec904f;
+  --dda-enabled: #009a00;
+  --dda-disabled: #979797;
+  --dda-spacing: 12px;
+}
+
+.dda-body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--dda-bg);
+  font-size: 14px;
+}
+.dda-popup {
+  min-width: 260px;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.dda-popup header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: var(--dda-spacing);
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+.dda-popup main {
+  padding: 8px var(--dda-spacing);
+}
+.dda-popup footer {
+  padding: var(--dda-spacing);
+  font-size: 12px;
+  font-weight: 500;
+  color: #1c1c55;
+}
+.dda-popup p {
+  margin: 0 0 8px;
+}
+.dda-popup h1 {
+  font-size: 16px;
+  color: #1c1c55;
+  padding: 0;
+  margin: 0;
+}
+.dda-popup h2 {
+  font-size: 12px;
+  font-weight: 500;
+  color: #1c1c55;
+  padding: 0;
+  margin: 0 0 6px;
+}
+.dda-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.dda-field {
+  display: flex;
+  gap: 4px;
+}
+.dda-field.between {
+  align-items: center;
+  justify-content: space-between;
+}
+.dda-field input[type="text"] {
+  padding: 6px 8px;
+  background-color: #ffffff;
+  appearance: none;
+  border-radius: 4px;
+  border: 1px solid var(--dda-disabled);
+  margin: 0;
+  width: 100%;
+  outline: none;
+}
+.dda-field input[type="text"]:hover,
+.dda-field input[type="text"]:focus {
+  border-color: var(--dda-primary);
+}
+.dda-field button {
+  padding: 6px 8px;
+  background-color: var(--dda-primary);
+  appearance: none;
+  border-radius: 4px;
+  border: 1px solid var(--dda-primary);
+  margin: 0;
+  cursor: pointer;
+  min-width: 50px;
+  transition: opacity 0.3s ease;
+}
+.dda-field button:hover {
+  opacity: 0.8;
+}
+.dda-switch input {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.dda-switch span {
+  background-color: var(--dda-disabled);
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.dda-switch span:before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  transition: left 0.3s ease;
+}
+.dda-switch input:checked + span {
+  background: var(--dda-enabled);
+}
+.dda-switch input:checked + span:before {
+  left: 18px;
+}
+.dda-attr-list {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.dda-attr-item {
+  background-color: #fff4ed;
+  border: 1px solid var(--dda-primary);
+  padding: 2px 4px 2px 6px;
+  display: inline-flex;
+  border-radius: 4px;
+  gap: 4px;
+  align-items: center;
+}
+.dda-attr-item span {
   color: red;
+  display: inline-flex;
+  height: 15px;
+  width: 15px;
+  background-color: #ffe1e1;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.dda-attr-item span:hover {
+  opacity: 1;
 }

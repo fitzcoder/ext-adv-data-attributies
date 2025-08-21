@@ -1,7 +1,46 @@
 <html>
-  <body>
-    <h1>Popup page here</h1>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body class="dda-body">
+    <!-- Layout -->
+    <section class="dda-popup">
+      <header class="header">
+        <img src="../images/icon-16.png" height="16" width="16" alt="Logo" />
+        <h1>Display Data Attributes</h1>
+      </header>
+      <main>
+        <h2>Settings</h2>
+        <div class="dda-card">
+          <div class="dda-field between">
+            <label for="is-display">Display data-x</label>
+            <label class="dda-switch">
+              <input id="is-display" type="checkbox" />
+              <span></span>
+            </label>
+          </div>
+          <label for="attr-text">Your data-attributes list:</label>
+          <div class="dda-field">
+            <input
+              id="attr-text"
+              type="text"
+              placeholder="data-testid, aria-label,..."
+            />
+            <button>Add</button>
+          </div>
+          <div class="dda-attr-list">
+            <div class="dda-attr-item">data-testid<span>✕</span></div>
+            <div class="dda-attr-item">aria-label<span>✕</span></div>
+          </div>
+        </div>
+      </main>
+      <footer>Made with ❤️ by Uy Pham</footer>
+    </section>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="popup.css" />
+
+    <!-- JS -->
     <script src="popup.js"></script>
   </body>
 </html>
