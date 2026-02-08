@@ -1,3 +1,5 @@
+const DDA_ATTR_STRINGS = ["data-testid"];
+
 const getInfoTab = async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   const url = new URL(tab.url);
@@ -10,7 +12,7 @@ const getConfigForDomain = async (domain) => {
       const valid = result[domain];
       resolve({
         isDisplay: valid?.isDisplay ?? false,
-        attrStrings: valid?.attrStrings ?? ["data-testid", "aria-label"],
+        attrStrings: valid?.attrStrings ?? DDA_ATTR_STRINGS,
       });
     });
   });
@@ -63,33 +65,70 @@ class Config {
     return document.querySelectorAll(queryStrings);
   }
 
-  addBadgeAfterElements(elements) {
+  /**
+   * Generate badges for elements
+   * and append to the page after body
+   */
+  generateBadges(elements) {
+    if (document.getElementById("dda-attr-page"))
+      document.getElementById("dda-attr-page").remove();
+    const page = document.createElement("div");
+    page.id = "dda-attr-page";
+    document.body.insertAdjacentElement("afterend", page);
+
     elements.forEach((el) => {
+      const position = el.getBoundingClientRect();
+
       const badge = document.createElement("span");
-      badge.classList.add("dda-attr-badge");
       const attrInfo = this.getAttrOfElement(el);
       badge.innerHTML = `<span>${attrInfo.attr}:</span> <span>${attrInfo.value}</span>`;
-      const div = document.createElement("div");
-      div.style.position = "absolute";
-      div.appendChild(badge);
-      el.insertAdjacentElement("afterbegin", div);
+      badge.style.top = `${position.top + window.scrollY}px`;
+      badge.style.left = `${position.left + window.scrollX}px`;
+      badge.classList.add(
+        "dda-attr-badge",
+        `dda-attr-tag-${el.tagName.toLowerCase()}`
+      );
+      page.appendChild(badge);
+
+      // Adjust position to avoid overflow
+      const badgeRect = badge.getBoundingClientRect();
+      if (badgeRect.right > window.innerWidth) {
+        badge.style.left = `${
+          position.left +
+          window.scrollX -
+          (badgeRect.right - window.innerWidth) -
+          4
+        }px`;
+      }
+      if (badgeRect.bottom > window.innerHeight) {
+        badge.style.top = `${
+          position.top +
+          window.scrollY -
+          (badgeRect.bottom - window.innerHeight) -
+          4
+        }px`;
+      }
     });
   }
 
+  /* Show all badges */
   async showBadges() {
     const elements = await this.getValidElements();
     if (!elements || elements.length === 0) {
       return;
     }
-    this.addBadgeAfterElements(elements);
+    this.generateBadges(elements);
   }
 
+  /* Hide all badges */
   async hideBadges() {
-    // Remove all badges
-    const badges = document.querySelectorAll(".dda-attr-badge");
-    badges.forEach((badge) => badge.remove());
+    const page = document.getElementById("dda-attr-page");
+    if (page) {
+      page.remove();
+    }
   }
 
+  /* Reload badges */
   async reloadBadges() {
     await this.hideBadges();
     await this.showBadges();

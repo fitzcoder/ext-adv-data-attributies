@@ -10,6 +10,7 @@ const init = async () => {
     } else if (msg.type === "HIDE_BADGES") {
       configsInstance.hideBadges();
     } else if (msg.type === "RELOAD_BADGES") {
+      configsInstance.set({ attrStrings: msg.attrStrings });
       configsInstance.reloadBadges();
     }
   });

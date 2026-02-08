@@ -3,7 +3,8 @@ import "../scripts/main.js";
 document.addEventListener("DOMContentLoaded", async () => {
   const configsInstance = await AdvAttribute.Config.create();
 
-  const generateAttrListHTML = (attrStrings) => {
+  const generateAttrListHTML = () => {
+    const attrStrings = configsInstance.config.attrStrings;
     attrListDiv.innerHTML = "";
     attrStrings.forEach((attr) => {
       const div = document.createElement("div");
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Initialize state
   displayCheckbox.checked = configsInstance.config.isDisplay;
   attrStringsInput.value = configsInstance.config.attrStrings.join(",");
-  generateAttrListHTML(configsInstance.config.attrStrings);
+  generateAttrListHTML();
 
   // Checkbox: onChange
   displayCheckbox.addEventListener("change", () => {
@@ -56,7 +57,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       .map((s) => s.trim())
       .filter((s) => s.length > 0);
     configsInstance.set({ attrStrings });
-    generateAttrListHTML(attrStrings);
-    chrome.tabs.sendMessage(configsInstance.tabId, { type: "RELOAD_BADGES" });
+    generateAttrListHTML();
+    chrome.tabs.sendMessage(configsInstance.tabId, {
+      type: "RELOAD_BADGES",
+      attrStrings,
+    });
   });
 });
