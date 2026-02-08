@@ -1,0 +1,15 @@
+.dda-attr-badge {
+  color: #000;
+  font-weight: 400;
+  margin-left: 4px;
+  position: relative;
+  top: -2px;
+  left: 0;
+  padding: 2px 4px;
+  background: #ffd400;
+  border-radius: 4px;
+}
+
+.dda-attr-badge:hover {
+  z-index: 10;
+}

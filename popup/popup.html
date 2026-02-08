@@ -19,19 +19,16 @@
               <span></span>
             </label>
           </div>
-          <label for="attr-text">Your data-attributes list:</label>
+          <label for="attr-strings">Your data-attributes list:</label>
           <div class="dda-field">
-            <input
-              id="attr-text"
+            <textarea
+              id="attr-strings"
               type="text"
               placeholder="data-testid, aria-label,..."
-            />
-            <button>Add</button>
+            ></textarea>
+            <button id="update-btn">Update</button>
           </div>
-          <div class="dda-attr-list">
-            <div class="dda-attr-item">data-testid<span>✕</span></div>
-            <div class="dda-attr-item">aria-label<span>✕</span></div>
-          </div>
+          <div class="dda-attr-list" id="attr-list"></div>
         </div>
       </main>
       <footer>Made with ❤️ by Uy Pham</footer>
@@ -41,6 +38,6 @@
     <link rel="stylesheet" href="popup.css" />
 
     <!-- JS -->
-    <script src="popup.js"></script>
+    <script type="module" src="popup.js"></script>
   </body>
 </html>
