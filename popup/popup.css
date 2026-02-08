@@ -179,14 +179,3 @@ body {
   padding: 0.25rem;
   font-family: inherit;
 }
-.dda-attr-badge {
-  color: #000;
-  font-weight: 500;
-  margin-left: 4px;
-  position: relative;
-  top: -2px;
-  left: 0;
-  padding: 2px 4px;
-  background: #ffd400;
-  border-radius: 4px;
-}

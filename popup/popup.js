@@ -44,10 +44,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   displayCheckbox.addEventListener("change", () => {
     configsInstance.set({ isDisplay: displayCheckbox.checked });
     if (displayCheckbox.checked) {
-      console.log("Display is ON");
       chrome.tabs.sendMessage(configsInstance.tabId, { type: "SHOW_BADGES" });
     } else {
-      console.log("Display is OFF");
       chrome.tabs.sendMessage(configsInstance.tabId, { type: "HIDE_BADGES" });
     }
   });
