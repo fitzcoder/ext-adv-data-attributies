@@ -29,6 +29,30 @@ const init = async () => {
   setTimeout(() => {
     configsInstance.showBadges();
   }, 1000);
+
+  // Detect Route Change in SPA
+  // let lastUrl = location.href;
+  // setInterval(() => {
+  //   if (location.href !== lastUrl) {
+  //     lastUrl = location.href;
+  //     console.log("route changed", lastUrl);
+  //     configsInstance.reloadBadges();
+  //   }
+  // }, 500);
+
+  // Detect DOM changes
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0) {
+        configsInstance.reloadBadges();
+        break;
+      }
+    }
+  });
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
 };
 
 init();

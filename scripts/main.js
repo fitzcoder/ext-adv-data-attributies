@@ -56,8 +56,13 @@ class Config {
 
   getAttrOfElement(element) {
     for (const attr of this.config.attrStrings) {
-      if (element.hasAttribute(attr)) {
-        return { attr, value: element.getAttribute(attr) };
+      let validAttr = (attr || "").trim();
+      if (validAttr.indexOf("[") > -1 || validAttr.indexOf("]") > -1) {
+        const match = validAttr.match(/\[(.*?)\]/);
+        validAttr = match ? match[1] : null;
+      }
+      if (validAttr && element.hasAttribute(validAttr)) {
+        return { attr: validAttr, value: element.getAttribute(validAttr) };
       }
     }
     return null;
@@ -65,7 +70,10 @@ class Config {
 
   async getValidElements() {
     const queryStrings = this.config.attrStrings
-      .map((attr) => `[${attr}]`)
+      .filter((attr) => attr && attr.length > 0)
+      .map((attr) =>
+        attr.indexOf("[") > -1 || attr.indexOf("]") > -1 ? attr : `[${attr}]`
+      )
       .join(",");
     return document.querySelectorAll(queryStrings);
   }
