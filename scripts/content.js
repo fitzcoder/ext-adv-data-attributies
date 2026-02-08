@@ -4,7 +4,7 @@ const init = async () => {
   const configsInstance = await AdvAttribute.Config.create(domain);
 
   // Listen to messages
-  chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+  chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === "SHOW_BADGES") {
       configsInstance.showBadges();
     } else if (msg.type === "HIDE_BADGES") {

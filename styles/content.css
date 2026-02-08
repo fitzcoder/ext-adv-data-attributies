@@ -18,10 +18,12 @@
   font-size: 0.75rem;
   background-color: rgb(251, 224, 89, 0.9);
   position: absolute;
+  z-index: 9998;
+  cursor: default;
 }
 
 .dda-attr-badge:hover {
-  z-index: 10;
+  z-index: 9999;
 }
 
 .dda-attr-tag-image,

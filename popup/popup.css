@@ -14,7 +14,7 @@ body {
 }
 .dda-popup {
   min-width: 260px;
-  max-height: 300px;
+  max-height: 360px;
   overflow-y: auto;
   overflow-x: hidden;
   height: auto;
@@ -75,6 +75,9 @@ body {
   gap: 4px;
   align-items: start;
 }
+.dda-field.column {
+  flex-direction: column;
+}
 .dda-field.between {
   align-items: center;
   justify-content: space-between;
@@ -103,6 +106,7 @@ body {
   cursor: pointer;
   min-width: 50px;
   transition: opacity 0.3s ease;
+  width: 100%;
 }
 .dda-field button:hover {
   opacity: 0.8;
@@ -171,11 +175,11 @@ body {
   opacity: 1;
 }
 .dda-field textarea {
-  width: calc(100% - 4rem);
-  min-width: calc(100% - 4rem);
-  max-width: calc(100% - 4rem);
+  width: 100%;
   min-height: 3rem;
   max-height: 6rem;
   padding: 0.25rem;
   font-family: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--dda-disabled);
 }

@@ -3,7 +3,7 @@ const DDA_ATTR_STRINGS = ["data-testid"];
 const getInfoTab = async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   const url = new URL(tab.url);
-  return { domain: url.hostname, tabId: tab.id };
+  return { domain: url.hostname, tabId: tab.id, url: tab.url };
 };
 
 const getConfigForDomain = async (domain) => {
@@ -22,6 +22,7 @@ class Config {
   tabId = null;
   domain = null;
   config = null;
+  disabled = false;
 
   async init(domain) {
     if (domain) {
@@ -30,8 +31,12 @@ class Config {
       const infoTab = await getInfoTab();
       this.domain = infoTab.domain;
       this.tabId = infoTab.tabId;
+      this.disabled = ["chrome://", "edge://", "about:"].some((prefix) =>
+        infoTab.url.startsWith(prefix)
+      );
     }
     this.config = await getConfigForDomain(this.domain);
+
     return this;
   }
 

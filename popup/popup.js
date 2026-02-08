@@ -37,9 +37,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   const attrListDiv = document.getElementById("attr-list");
 
   // Initialize state
-  displayCheckbox.checked = configsInstance.config.isDisplay;
-  attrStringsInput.value = configsInstance.config.attrStrings.join(",");
-  generateAttrListHTML();
+  if (configsInstance.disabled) {
+    displayCheckbox.disabled = true;
+    attrStringsInput.disabled = true;
+    updateBtn.disabled = true;
+    updateBtn.textContent = "DISABLED";
+  } else {
+    displayCheckbox.checked = configsInstance.config.isDisplay;
+    attrStringsInput.value = configsInstance.config.attrStrings.join(",");
+    generateAttrListHTML();
+  }
 
   // Checkbox: onChange
   displayCheckbox.addEventListener("change", () => {
