@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Elements
   const displayCheckbox = document.getElementById("is-display");
+  const clickThroughCheckbox = document.getElementById("is-click-through");
   const attrStringsInput = document.getElementById("attr-strings");
   const updateBtn = document.getElementById("update-btn");
   const attrListDiv = document.getElementById("attr-list");
@@ -41,21 +42,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     displayCheckbox.disabled = true;
     attrStringsInput.disabled = true;
     updateBtn.disabled = true;
+    clickThroughCheckbox.disabled = true;
     updateBtn.textContent = "DISABLED";
   } else {
     displayCheckbox.checked = configsInstance.config.isDisplay;
+    clickThroughCheckbox.checked = configsInstance.config.isClickThrough;
     attrStringsInput.value = configsInstance.config.attrStrings.join(",");
     generateAttrListHTML();
   }
 
-  // Checkbox: onChange
+  // Display Checkbox: onChange
   displayCheckbox.addEventListener("change", () => {
     configsInstance.set({ isDisplay: displayCheckbox.checked });
-    if (displayCheckbox.checked) {
-      chrome.tabs.sendMessage(configsInstance.tabId, { type: "SHOW_BADGES" });
-    } else {
-      chrome.tabs.sendMessage(configsInstance.tabId, { type: "HIDE_BADGES" });
-    }
+    chrome.tabs.sendMessage(configsInstance.tabId, {
+      type: displayCheckbox.checked ? "SHOW_BADGES" : "HIDE_BADGES",
+    });
+  });
+  // Click Through Checkbox: onChange
+  clickThroughCheckbox.addEventListener("change", () => {
+    configsInstance.set({ isClickThrough: clickThroughCheckbox.checked });
+    chrome.tabs.sendMessage(configsInstance.tabId, {
+      type: clickThroughCheckbox.checked
+        ? "ENABLE_CLICK_THROUGH"
+        : "DISABLE_CLICK_THROUGH",
+    });
   });
   // Update button: onClick
   updateBtn.addEventListener("click", () => {

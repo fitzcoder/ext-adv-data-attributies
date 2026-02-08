@@ -12,6 +12,7 @@ const getConfigForDomain = async (domain) => {
       const valid = result[domain];
       resolve({
         isDisplay: valid?.isDisplay ?? false,
+        isClickThrough: valid?.isClickThrough ?? false,
         attrStrings: valid?.attrStrings ?? DDA_ATTR_STRINGS,
       });
     });
