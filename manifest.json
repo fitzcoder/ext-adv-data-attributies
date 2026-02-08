@@ -17,17 +17,10 @@
     {
       "matches": ["<all_urls>"],
       "css": ["styles/content.css"],
-      "js": ["scripts/utils.js", "scripts/content.js"]
+      "js": ["scripts/main.js", "scripts/content.js"]
     }
   ],
   "permissions": ["activeTab", "storage", "tabs", "scripting"],
   "optional_permissions": [],
-  "host_permissions": ["https://www.developer.chrome.com/*"],
-  "optional_host_permissions": ["https://*/*", "http://*/*"],
-  "web_accessible_resources": [
-    {
-      "resources": ["scripts/utils.js"],
-      "matches": ["<all_urls>"]
-    }
-  ]
+  "optional_host_permissions": ["https://*/*", "http://*/*"]
 }

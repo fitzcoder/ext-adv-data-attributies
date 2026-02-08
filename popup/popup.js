@@ -1,4 +1,4 @@
-import "../scripts/utils.js";
+import "../scripts/main.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const configsInstance = await AdvAttribute.Config.create();

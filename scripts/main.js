@@ -9,11 +9,8 @@ const getConfigForDomain = async (domain) => {
     chrome.storage.sync.get([domain], (result) => {
       const valid = result[domain];
       resolve({
-        isDisplay: result[domain]?.isDisplay ?? false,
-        attrStrings: result[domain]?.attrStrings ?? [
-          "data-testid",
-          "aria-label",
-        ],
+        isDisplay: valid?.isDisplay ?? false,
+        attrStrings: valid?.attrStrings ?? ["data-testid", "aria-label"],
       });
     });
   });
