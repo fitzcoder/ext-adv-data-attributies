@@ -20,7 +20,5 @@
       "js": ["scripts/main.js", "scripts/content.js"]
     }
   ],
-  "permissions": ["activeTab", "storage", "tabs", "scripting"],
-  "optional_permissions": [],
-  "optional_host_permissions": ["https://*/*", "http://*/*"]
+  "permissions": ["storage", "tabs"]
 }

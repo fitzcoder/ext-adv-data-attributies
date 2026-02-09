@@ -88,6 +88,9 @@ class Config {
       document.getElementById("dda-attr-page").remove();
     const page = document.createElement("div");
     page.id = "dda-attr-page";
+    if (this.config.isClickThrough) {
+      page.classList.add("dda-click-through");
+    }
     document.body.insertAdjacentElement("afterend", page);
 
     elements.forEach((el) => {
@@ -146,6 +149,17 @@ class Config {
   async reloadBadges() {
     await this.hideBadges();
     await this.showBadges();
+  }
+
+  async toggleClickThrough() {
+    const page = document.getElementById("dda-attr-page");
+    if (page) {
+      if (this.config.isClickThrough) {
+        page.classList.add("dda-click-through");
+      } else {
+        page.classList.remove("dda-click-through");
+      }
+    }
   }
 }
 
